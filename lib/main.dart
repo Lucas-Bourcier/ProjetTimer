@@ -2,7 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart' as pathProvider;
-import 'package:project_timer/pages/TestTimer.dart';
+import 'package:project_timer/pages/Grid.dart';
+import 'package:project_timer/pages/Timer.dart';
 
 void main() async{
   if (Platform.isWindows) {
@@ -21,14 +22,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Crono',
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => const TestTimer(title: 'Circular Countdown Timer'),
-        //'/todos': (context) => const TodoListPage(title: 'Todos'),
+        '/': (context) => const Timer(title: 'Crono'),
+        '/grid': (context) => const GridTemplate(title: 'Crono'),
       },
     );
   }

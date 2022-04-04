@@ -3,19 +3,20 @@ import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:getwidget/getwidget.dart';
 
 
-class TestTimer extends StatefulWidget {
-  const TestTimer({Key? key, this.title}) : super(key: key);
+class Timer extends StatefulWidget {
+  const Timer({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
 
   @override
-  State<TestTimer> createState() => _TestTimer();
+  State<Timer> createState() => _Timer();
 }
 
-class _TestTimer extends State<TestTimer> {
+class _Timer extends State<Timer> {
   final int _duration = 10;
   final CountDownController _controller = CountDownController();
+  final items = List<String>.generate(100, (i) => "Item $i");
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +36,10 @@ class _TestTimer extends State<TestTimer> {
             controller: _controller,
 
             // Width of the Countdown Widget.
-            width: MediaQuery.of(context).size.width / 2,
+            width: MediaQuery.of(context).size.width / 10,
 
             // Height of the Countdown Widget.
-            height: MediaQuery.of(context).size.height / 2,
+            height: MediaQuery.of(context).size.height / 10,
 
             // Ring Color for Countdown Widget.
             ringColor: Colors.grey[300]!,
@@ -75,7 +76,7 @@ class _TestTimer extends State<TestTimer> {
             textFormat: CountdownTextFormat.S,
 
             // Handles Countdown Timer (true for Reverse Countdown (max to 0), false for Forward Countdown (0 to max)).
-            isReverse: true,
+            isReverse: false,
 
             // Handles Animation Direction (true for Reverse Animation, false for Forward Animation).
             isReverseAnimation: false,
@@ -101,6 +102,10 @@ class _TestTimer extends State<TestTimer> {
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          const SizedBox(
+            width: 30,
+          ),
+          _button(title: "Page Grid", onPressed: () =>  Navigator.pushNamed(context, '/grid')),
           const SizedBox(
             width: 30,
           ),
