@@ -1,7 +1,15 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:getwidget/getwidget.dart';
+import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart' as pathProvider;
+import 'package:project_timer/pages/TestTimer.dart';
 
-void main() {
+void main() async{
+  if (Platform.isWindows) {
+    Directory directory = await pathProvider.getApplicationDocumentsDirectory();
+    Hive.init(directory.path);
+  }
+
   runApp(const MyApp());
 }
 
@@ -17,42 +25,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
       ),
-      home: const MyHomePage(title: 'Cronos'),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const TestTimer(title: 'Circular Countdown Timer'),
+        //'/todos': (context) => const TodoListPage(title: 'Todos'),
+      },
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Scaffold(
-      appBar: AppBar(
-
-        title: Text(widget.title),
-      ),
-      body: Center(
-      ),
-    );
-  }
-}
