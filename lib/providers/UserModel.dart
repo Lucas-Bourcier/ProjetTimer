@@ -13,16 +13,17 @@ class UserModel extends ChangeNotifier{
     notifyListeners();
   }
 
-  updateUser(int index, String newValue) {
-    _users[index].name = newValue;
+  updateUser(int index, String newName,String newPrenom) {
+    _users[index].name = newName;
+    _users[index].prenom = newPrenom;
     notifyListeners();
   }
 
-  insertOrUpdateUser(int index, String newValue) {
+  insertOrUpdateUser(int index, String newName, String newPrenom) {
     if (index == -1) {
-      addUser(newValue);
+      addUser(newName, newPrenom);
     } else {
-      updateUser(index, newValue);
+      updateUser(index, newName, newPrenom);
     }
   }
 

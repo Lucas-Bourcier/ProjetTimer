@@ -18,15 +18,30 @@ class TimerAdapter extends TypeAdapter<Timer> {
     };
     return Timer(
       duree: fields[0] as int,
+      description: fields[1] as String,
+      statut: fields[2] as String,
+      visible: fields[3] as Bool,
+      ordre: fields[4] as int,
+      dateActivation: fields[5] as DateTime,
     );
   }
 
   @override
   void write(BinaryWriter writer, Timer obj) {
     writer
-      ..writeByte(1)
+      ..writeByte(6)
       ..writeByte(0)
-      ..write(obj.duree);
+      ..write(obj.duree)
+      ..writeByte(1)
+      ..write(obj.description)
+      ..writeByte(2)
+      ..write(obj.statut)
+      ..writeByte(3)
+      ..write(obj.visible)
+      ..writeByte(4)
+      ..write(obj.ordre)
+      ..writeByte(5)
+      ..write(obj.dateActivation);
   }
 
   @override

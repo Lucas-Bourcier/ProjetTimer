@@ -8,21 +8,21 @@ class GroupeModel extends ChangeNotifier{
     return _groupes;
   }
 
-  addGroupe(String name) {
-    _groupes.add(Groupe(name: name));
+  addGroupe(String libelle) {
+    _groupes.add(Groupe(libelle: libelle));
     notifyListeners();
   }
 
-  updateGroupe(int index, String newValue) {
-    _groupes[index].name = newValue;
+  updateGroupe(int index, String newLibelle) {
+    _groupes[index].libelle = newLibelle;
     notifyListeners();
   }
 
-  insertOrUpdateGroupe(int index, String newValue) {
+  insertOrUpdateGroupe(int index, String newLibelle) {
     if (index == -1) {
-      addGroupe(newValue);
+      addGroupe(newLibelle);
     } else {
-      updateGroupe(index, newValue);
+      updateGroupe(index, newLibelle);
     }
   }
 
