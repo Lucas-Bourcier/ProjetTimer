@@ -15,7 +15,7 @@ class Timer{
   @HiveField(3)
   late String statut;
   @HiveField(4)
-  late Bool visible;
+  late bool visible;
   @HiveField(5)
   late int ordre;
   @HiveField(6)

@@ -26,7 +26,7 @@ class Timer {
   bool statut;
   bool visible;
   int ordre;
-  DateTime activationDate;
+  DateTime? activationDate;
 
   factory Timer.fromJson(Map<String, dynamic> json) {
     Timer t=Timer(
@@ -37,7 +37,7 @@ class Timer {
       visible: json["visible"]??false,
       ordre: json["ordre"]??0,
     );
-    t.activationDate=DateTime.parse(json["activationDate"]);
+    t.activationDate=DateTime.tryParse(json["activationDate"]??'');
     return t;
   }
 
@@ -48,7 +48,7 @@ class Timer {
     "statut": statut,
     "visible": visible,
     "ordre": ordre,
-    "activationDate": "${activationDate.year.toString().padLeft(4, '0')}-${activationDate.month.toString().padLeft(2, '0')}-${activationDate.day.toString().padLeft(2, '0')}",
+    "activationDate": "${activationDate!.year.toString().padLeft(4, '0')}-${activationDate!.month.toString().padLeft(2, '0')}-${activationDate!.day.toString().padLeft(2, '0')}",
   };
 }
 @Collection<Timer>('/Timer/')
