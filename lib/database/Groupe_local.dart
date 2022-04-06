@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 
 part 'Groupe_local.g.dart';
 
-@HiveType(typeId: 2)
+@HiveType(typeId: 5)
 class Groupe{
   @HiveField(0)
   String libelle;

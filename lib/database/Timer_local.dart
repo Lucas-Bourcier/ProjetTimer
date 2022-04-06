@@ -1,10 +1,8 @@
-import 'dart:ffi';
-
 import 'package:hive/hive.dart';
 
 part 'Timer_local.g.dart';
 
-@HiveType(typeId: 3)
+@HiveType(typeId: 6)
 class Timer{
   @HiveField(0)
   late String name;
@@ -13,13 +11,11 @@ class Timer{
   @HiveField(2)
   late String description;
   @HiveField(3)
-  late String statut;
+  late bool statut;
   @HiveField(4)
   late bool visible;
   @HiveField(5)
   late int ordre;
   @HiveField(6)
-  late DateTime dateActivation;
-
-
+  late DateTime activationDate;
 }
