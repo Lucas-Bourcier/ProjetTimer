@@ -1,4 +1,4 @@
-import 'package:project_timer/database/User.dart';
+import 'package:project_timer/database/User_local.dart';
 import 'package:flutter/widgets.dart';
 
 class UserModel extends ChangeNotifier{

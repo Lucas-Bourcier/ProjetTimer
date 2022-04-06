@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 
-part 'Groupe.g.dart';
+part 'Groupe_local.g.dart';
 
 @HiveType(typeId: 2)
 class Groupe{

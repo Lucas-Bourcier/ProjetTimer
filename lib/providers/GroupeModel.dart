@@ -1,4 +1,4 @@
-import 'package:project_timer/database/Groupe.dart';
+import 'package:project_timer/database/Groupe_local.dart';
 import 'package:flutter/widgets.dart';
 
 class GroupeModel extends ChangeNotifier{

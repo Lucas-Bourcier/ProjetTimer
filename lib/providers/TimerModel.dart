@@ -1,6 +1,6 @@
 import 'dart:ffi';
 
-import 'package:project_timer/database/Timer.dart';
+import 'package:project_timer/database/Timer_local.dart';
 import 'package:flutter/widgets.dart';
 
 class TimerModel extends ChangeNotifier{
@@ -10,12 +10,13 @@ class TimerModel extends ChangeNotifier{
     return _timers;
   }
 
-  addTimer(int duree, String description, String statut, Bool visible, int ordre, DateTime dateActivation) {
-    _timers.add(Timer(duree: duree, description: description, statut: statut, visible: visible, ordre: ordre, dateActivation: dateActivation));
+  addTimer(String name, int duree, String description, String statut, Bool visible, int ordre, DateTime dateActivation) {
+    _timers.add(Timer(name: name, duree: duree, description: description, statut: statut, visible: visible, ordre: ordre, dateActivation: dateActivation));
     notifyListeners();
   }
 
-  updateTimer(int index,int newDuree, String newDescription, String newStatut, Bool newVisible, int newOrdre, DateTime newDateActivation) {
+  updateTimer(int index,String newName, int newDuree, String newDescription, String newStatut, Bool newVisible, int newOrdre, DateTime newDateActivation) {
+    _timers[index].name = newName;
     _timers[index].duree = newDuree;
     _timers[index].description = newDescription;
     _timers[index].statut = newStatut;
@@ -25,11 +26,11 @@ class TimerModel extends ChangeNotifier{
     notifyListeners();
   }
 
-  insertOrUpdateTimer(int index,int newDuree, String newDescription, String newStatut, Bool newVisible, int newOrdre, DateTime newDateActivation) {
+  insertOrUpdateTimer(int index,String newName,int newDuree, String newDescription, String newStatut, Bool newVisible, int newOrdre, DateTime newDateActivation) {
     if (index == -1) {
-      addTimer(newDuree, newDescription, newStatut, newVisible, newOrdre, newDateActivation);
+      addTimer(newName, newDuree, newDescription, newStatut, newVisible, newOrdre, newDateActivation);
     } else {
-      updateTimer(index, newDuree, newDescription, newStatut, newVisible, newOrdre, newDateActivation);
+      updateTimer(index, newName,newDuree, newDescription, newStatut, newVisible, newOrdre, newDateActivation);
     }
   }
 
