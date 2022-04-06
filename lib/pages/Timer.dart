@@ -52,10 +52,10 @@ class _Timer extends State<Timer> {
                   controller: _controller,
 
                   // Width of the Countdown Widget.
-                  width: MediaQuery.of(context).size.width / 10,
+                  width: MediaQuery.of(context).size.width / 6,
 
                   // Height of the Countdown Widget.
-                  height: MediaQuery.of(context).size.height / 10,
+                  height: MediaQuery.of(context).size.height / 6,
 
                   // Ring Color for Countdown Widget.
                   ringColor: Colors.grey[300]!,
@@ -115,24 +115,37 @@ class _Timer extends State<Timer> {
                     debugPrint('Countdown Ended');
                   },
                 ),
-                const SizedBox(
-                  width: 30,
-                ),
-                _button(title: "Start", onPressed: () => _controller.start()),
-                const SizedBox(
-                  width: 10,
-                ),
-                _button(title: "Pause", onPressed: () => _controller.pause()),
-                const SizedBox(
-                  width: 10,
-                ),
-                _button(title: "Resume", onPressed: () => _controller.resume()),
-                const SizedBox(
-                  width: 10,
-                ),
-                _button(
-                    title: "Restart",
-                    onPressed: () => _controller.restart(duration: _duration))
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        const SizedBox(
+                          width:  10,
+                        ),
+                        _button(title: "Start", onPressed: () => _controller.start(), icon: Icons.play_arrow),
+
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        _button(title: "Pause", onPressed: () => _controller.pause(), icon: Icons.pause),
+                      ],
+                      ),
+                    Row(
+                      children: [
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        _button(title: "Resume", onPressed: () => _controller.resume(), icon: Icons.play_circle),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        _button(
+                            title: "Restart",
+                            onPressed: () => _controller.restart(duration: _duration), icon: Icons.refresh)
+                      ],
+                    )
+                  ],
+                )
               ],
             ),
           ),
@@ -140,17 +153,17 @@ class _Timer extends State<Timer> {
     );
   }
 
-  Widget _button({required String title, VoidCallback? onPressed}) {
-    return Expanded(
-        child: ElevatedButton(
+  Widget _button({required String title,required IconData icon, VoidCallback? onPressed}) {
+    return Container(
+        child: GFButton(
+          color: Colors.deepPurple,
+          onPressed: onPressed,
           child: Text(
             title,
             style: const TextStyle(color: Colors.white),
           ),
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.purple),
-          ),
-          onPressed: onPressed,
+          icon: Icon(icon, color: Colors.white) ,
+          size: GFSize.SMALL,
         ));
   }
 }
