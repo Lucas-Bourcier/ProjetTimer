@@ -1,5 +1,7 @@
-import 'package:project_timer/database/Trame.dart';
+import 'package:project_timer/database/Trame_local.dart';
 import 'package:flutter/widgets.dart';
+
+import '../database/Trame_local.dart';
 
 class TrameModel extends ChangeNotifier{
  final List<Trame> _trames = List.empty(growable: true);
