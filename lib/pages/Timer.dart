@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:project_timer/components/UserList.dart';
 
 
 class Timer extends StatefulWidget {
@@ -25,7 +26,7 @@ class _Timer extends State<Timer> {
         title: Text(widget.title!),
       ),
       body: Center(
-          child: CircularCountDownTimer(
+          child : UsersList(), /*CircularCountDownTimer(
             // Countdown duration in Seconds.
             duration: _duration,
 
@@ -98,7 +99,7 @@ class _Timer extends State<Timer> {
               // Here, do whatever you want
               debugPrint('Countdown Ended');
             },
-          )),
+          )*/),
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
