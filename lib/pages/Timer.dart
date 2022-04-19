@@ -1,4 +1,7 @@
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
+import 'package:getwidget/getwidget.dart';
+
 import 'package:project_timer/components/TimerList.dart';
 
 
@@ -21,13 +24,6 @@ class _Timer extends State<Timer> {
       appBar: AppBar(
         title: Text(widget.title!),
       ),
-<<<<<<< HEAD
-      body:  TimersList(),
-    );
-  }
-
-
-=======
       body:  Container(
           height: 500,
           child: GFCard(
@@ -169,5 +165,4 @@ class _Timer extends State<Timer> {
           size: GFSize.SMALL,
         ));
   }
->>>>>>> 54dcfe7435348e89cacc2f1a1a30b5f19a2e8822
 }
