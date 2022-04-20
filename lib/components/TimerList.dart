@@ -12,7 +12,6 @@ import 'package:getwidget/getwidget.dart';
 class TimersList extends StatelessWidget {
   final CountDownController _controller = CountDownController();
   final int _duration = 10;
-  final bool _started = false;
 
   @override
   Widget build(BuildContext context) {
@@ -122,20 +121,37 @@ class TimersList extends StatelessWidget {
                           debugPrint('Countdown Ended');
                         },
                       ),
-                      const SizedBox(
-                        width: 30,
-                      ),
-                      _button(title: "Start", onPressed: () => _controller.start()),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      _button(title: "stop", onPressed: () => _controller.start()),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      _button(
-                          title: "Restart",
-                          onPressed: () => _controller.restart(duration: _duration))
+                      Column(
+                        children: [
+                          Row(
+                            children: [
+                              const SizedBox(
+                                width:  10,
+                              ),
+                              _button(title: "Start", onPressed: () => _controller.start(), icon: Icons.play_arrow),
+
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              _button(title: "Pause", onPressed: () => _controller.pause(), icon: Icons.pause),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              _button(title: "Resume", onPressed: () => _controller.resume(), icon: Icons.play_circle),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              _button(
+                                  title: "Restart",
+                                  onPressed: () => _controller.restart(duration: _duration), icon: Icons.refresh)
+                            ],
+                          )
+                        ],
+                      )
                     ],
                   ),
                 ),
@@ -145,17 +161,19 @@ class TimersList extends StatelessWidget {
         }
     );
   }
-  Widget _button({required String title, VoidCallback? onPressed}) {
-    return Expanded(
-        child: ElevatedButton(
+  Widget _button({required String title,required IconData icon, VoidCallback? onPressed}) {
+    return Container(
+        child: GFButton(
+          color: Colors.deepPurple,
+          onPressed: onPressed,
           child: Text(
             title,
             style: const TextStyle(color: Colors.white),
           ),
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.purple),
-          ),
-          onPressed: onPressed,
+          icon: Icon(icon, color: Colors.white) ,
+          size: GFSize.SMALL,
         ));
   }
+
+
 }
