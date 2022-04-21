@@ -72,6 +72,7 @@ flutter:
   uses-material-design: true
   assets:
     - images/boruto.jpg
+    - images/test.webp
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -2,6 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:getwidget/components/button/gf_button.dart';
+import 'package:getwidget/components/button/gf_button_bar.dart';
+import 'package:getwidget/components/card/gf_card.dart';
+import 'package:getwidget/components/list_tile/gf_list_tile.dart';
 import 'package:project_timer/components/TimerList.dart';
 
 class Timer extends StatefulWidget {
@@ -23,7 +27,6 @@ Future<void> _confirmationClearList(context) async {
   bool visible = false;
   bool statut = false;
   String selectedValue = "One";
-
 
   return showDialog(
       context: context,
@@ -47,7 +50,7 @@ Future<void> _confirmationClearList(context) async {
                   ),
                   TextFormField(
                     decoration:
-                    InputDecoration(labelText: 'Description du timer'),
+                        InputDecoration(labelText: 'Description du timer'),
                     // The validator receives the text that the user has entered.
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -137,29 +140,47 @@ class _Timer extends State<Timer> {
         appBar: AppBar(
           title: Text(widget.title!),
         ),
-        body: Container(
-          width: MediaQuery
-              .of(context)
-              .size
-              .width / 2,
-          height: MediaQuery
-              .of(context)
-              .size
-              .height,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                  flex: 0,
-                  child: OutlinedButton(
-                    onPressed: () {
-                      _confirmationClearList(context);
-                    },
-                    child: const Text('Ajouter un Timer'),
-                  )),
-              Expanded(flex: 1, child: TimersList()),
-            ],
+        body: SingleChildScrollView(
+          child: Container(
+            width: MediaQuery.of(context).size.width / 2,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                    flex: 0,
+                    child: OutlinedButton(
+                      onPressed: () {
+                        _confirmationClearList(context);
+                      },
+                      child: const Text('Ajouter un Timer'),
+                    )),
+                GFCard(
+                  title: GFListTile(
+                    title: Text(
+                      "GROUPE 1",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    subTitle: GFButtonBar(
+                      children: [
+                        GFButton(
+                            onPressed: () {},
+                            text: 'Ajouter timer',
+                            icon: Icon(Icons.add),
+                            color: const Color.fromRGBO(72, 70, 70, 1.0)),
+                        GFButton(
+                            onPressed: () {},
+                            text: 'Ajouter trame',
+                            icon: Icon(Icons.add),
+                            color: const Color.fromRGBO(72, 70, 70, 1.0)),
+                      ],
+                    ),
+                  ),
+                  color: const Color.fromRGBO(47, 47, 47, 1.0),
+                  content: TimersList(),
+                )
+              ],
+            ),
           ),
         ));
   }

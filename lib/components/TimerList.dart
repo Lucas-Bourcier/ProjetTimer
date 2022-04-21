@@ -33,15 +33,22 @@ class TimersList extends StatelessWidget {
               return Container(
                 height: 500,
                 child: GFCard(
+                  color: const Color.fromRGBO(72, 70, 70, 1.0),
                   boxFit: BoxFit.cover,
                   titlePosition: GFPosition.start,
                   showImage: true,
                   title: GFListTile(
                     avatar: const GFAvatar(
-                      backgroundImage: AssetImage('images/boruto.jpg'),
+                      backgroundImage: AssetImage('images/test.webp'),
                     ),
-                    titleText: '${timer.name}',
-                    subTitleText: '${timer.description}',
+                    title: Text(
+                      '${timer.name}',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    subTitle: Text(
+                      '${timer.description}',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                   content: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -69,13 +76,14 @@ class TimersList extends StatelessWidget {
                         ringGradient: null,
 
                         // Filling Color for Countdown Widget.
-                        fillColor: Colors.purpleAccent[100]!,
+                        fillColor: const Color.fromRGBO(79, 125, 174, 1.0),
 
                         // Filling Gradient for Countdown Widget.
                         fillGradient: null,
 
                         // Background Color for Countdown Widget.
-                        backgroundColor: Colors.purple[500],
+                        backgroundColor:
+                            const Color.fromRGBO(79, 125, 174, 1.0),
 
                         // Background Gradient for Countdown Widget.
                         backgroundGradient: null,
@@ -176,7 +184,7 @@ class TimersList extends StatelessWidget {
       VoidCallback? onPressed}) {
     return Container(
         child: GFButton(
-      color: Colors.deepPurple,
+      color: const Color.fromRGBO(79, 125, 174, 1.0),
       onPressed: onPressed,
       child: Text(
         title,
