@@ -1,24 +1,23 @@
-
-
 import 'dart:developer';
 
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:cloud_firestore_odm/cloud_firestore_odm.dart';
-import 'package:project_timer/models/Timer.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
-
+import 'package:project_timer/models/Timer.dart';
 
 class TimersList extends StatelessWidget {
   final CountDownController _controller = CountDownController();
-  final int _duration = 10;
 
   @override
   Widget build(BuildContext context) {
     return FirestoreBuilder<TimerQuerySnapshot>(
         ref: timersRef,
-        builder: (context, AsyncSnapshot<TimerQuerySnapshot> snapshot, Widget? child) {
-          if (snapshot.hasError) {log(snapshot.error.toString());}
+        builder: (context, AsyncSnapshot<TimerQuerySnapshot> snapshot,
+            Widget? child) {
+          if (snapshot.hasError) {
+            log(snapshot.error.toString());
+          }
           if (!snapshot.hasData) return const Text('Loading users...');
 
           // Access the QuerySnapshot
@@ -30,7 +29,7 @@ class TimersList extends StatelessWidget {
             itemBuilder: (context, index) {
               // Access the User instance
               Timer timer = querySnapshot.docs[index].data;
-
+              final int _duration = timer.duree;
               return Container(
                 height: 500,
                 child: GFCard(
@@ -38,11 +37,11 @@ class TimersList extends StatelessWidget {
                   titlePosition: GFPosition.start,
                   showImage: true,
                   title: GFListTile(
-                    avatar:  const GFAvatar(
+                    avatar: const GFAvatar(
                       backgroundImage: AssetImage('images/boruto.jpg'),
                     ),
-                    titleText: 'Timer name: ${timer.name},',
-                    subTitleText: 'By kaishi',
+                    titleText: '${timer.name}',
+                    subTitleText: '${timer.description}',
                   ),
                   content: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -126,14 +125,19 @@ class TimersList extends StatelessWidget {
                           Row(
                             children: [
                               const SizedBox(
-                                width:  10,
+                                width: 10,
                               ),
-                              _button(title: "Start", onPressed: () => _controller.start(), icon: Icons.play_arrow),
-
+                              _button(
+                                  title: "Start",
+                                  onPressed: () => _controller.start(),
+                                  icon: Icons.play_arrow),
                               const SizedBox(
                                 width: 10,
                               ),
-                              _button(title: "Pause", onPressed: () => _controller.pause(), icon: Icons.pause),
+                              _button(
+                                  title: "Pause",
+                                  onPressed: () => _controller.pause(),
+                                  icon: Icons.pause),
                             ],
                           ),
                           Row(
@@ -141,13 +145,18 @@ class TimersList extends StatelessWidget {
                               const SizedBox(
                                 width: 10,
                               ),
-                              _button(title: "Resume", onPressed: () => _controller.resume(), icon: Icons.play_circle),
+                              _button(
+                                  title: "Resume",
+                                  onPressed: () => _controller.resume(),
+                                  icon: Icons.play_circle),
                               const SizedBox(
                                 width: 10,
                               ),
                               _button(
                                   title: "Restart",
-                                  onPressed: () => _controller.restart(duration: _duration), icon: Icons.refresh)
+                                  onPressed: () =>
+                                      _controller.restart(duration: _duration),
+                                  icon: Icons.refresh)
                             ],
                           )
                         ],
@@ -158,22 +167,23 @@ class TimersList extends StatelessWidget {
               );
             },
           );
-        }
-    );
+        });
   }
-  Widget _button({required String title,required IconData icon, VoidCallback? onPressed}) {
+
+  Widget _button(
+      {required String title,
+      required IconData icon,
+      VoidCallback? onPressed}) {
     return Container(
         child: GFButton(
-          color: Colors.deepPurple,
-          onPressed: onPressed,
-          child: Text(
-            title,
-            style: const TextStyle(color: Colors.white),
-          ),
-          icon: Icon(icon, color: Colors.white) ,
-          size: GFSize.SMALL,
-        ));
+      color: Colors.deepPurple,
+      onPressed: onPressed,
+      child: Text(
+        title,
+        style: const TextStyle(color: Colors.white),
+      ),
+      icon: Icon(icon, color: Colors.white),
+      size: GFSize.SMALL,
+    ));
   }
-
-
 }

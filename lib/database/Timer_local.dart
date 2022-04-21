@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 part 'Timer_local.g.dart';
 
 @HiveType(typeId: 6)
-class Timer{
+class Timer {
   @HiveField(0)
   late String name;
   @HiveField(1)
