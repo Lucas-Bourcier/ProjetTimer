@@ -50,7 +50,7 @@ Future<void> _confirmationClearList(context) async {
                   ),
                   TextFormField(
                     decoration:
-                        InputDecoration(labelText: 'Description du timer'),
+                    InputDecoration(labelText: 'Description du timer'),
                     // The validator receives the text that the user has entered.
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -142,7 +142,10 @@ class _Timer extends State<Timer> {
         ),
         body: SingleChildScrollView(
           child: Container(
-            width: MediaQuery.of(context).size.width / 2,
+            width: MediaQuery
+                .of(context)
+                .size
+                .width / 2,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -177,7 +180,12 @@ class _Timer extends State<Timer> {
                     ),
                   ),
                   color: const Color.fromRGBO(47, 47, 47, 1.0),
-                  content: TimersList(),
+                  content: Column(
+                    children: [
+                      TimersList(),
+
+                    ],
+                  ),
                 )
               ],
             ),
