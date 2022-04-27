@@ -21,13 +21,15 @@ class TimerPage extends StatefulWidget {
 
 Future<void> _confirmationClearList(context) async {
   final _formKey = GlobalKey<FormState>();
-  String name = "";
-  String description = "";
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController timeController = TextEditingController();
   int duree = 10;
   int ordre = 0;
   bool visible = false;
   bool statut = false;
   String selectedValue = "One";
+
 
   return showDialog(
       context: context,
@@ -45,11 +47,12 @@ Future<void> _confirmationClearList(context) async {
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter some text';
-                      }
-                      return name = value;
+                      }return null;
                     },
+                    controller: nameController,
                   ),
                   TextFormField(
+                    controller: descriptionController,
                     decoration:
                         InputDecoration(labelText: 'Description du timer'),
                     // The validator receives the text that the user has entered.
@@ -57,10 +60,10 @@ Future<void> _confirmationClearList(context) async {
                       if (value == null || value.isEmpty) {
                         return 'Please enter some text';
                       }
-                      return description = value;
                     },
                   ),
                   TextFormField(
+                    controller: timeController,
                     decoration: InputDecoration(labelText: 'Temps du timer'),
                     keyboardType: TextInputType.number,
                     inputFormatters: <TextInputFormatter>[
@@ -71,7 +74,6 @@ Future<void> _confirmationClearList(context) async {
                       if (value == null || value.isEmpty) {
                         return 'Please enter some text';
                       }
-                      //return value = duree; a voir
                     },
                   ),
                   Checkbox(
@@ -125,8 +127,9 @@ Future<void> _confirmationClearList(context) async {
                 textColor: Colors.white,
                 child: const Text('CONFIRM'),
                 onPressed: () {
-                  Timer u = Timer(name: name,description: description,duree: duree,ordre: ordre,statut: statut,visible: visible);
+                  Timer u = Timer(name: nameController.text,description: descriptionController.text,duree: int.parse(timeController.text),ordre: ordre,statut: statut,visible: visible);
                   FirebaseFirestore.instance.collection('Timer').add(u.toJson());
+                  //FirebaseFirestore.instance.collection('Timer').doc(Timer.uid).delete(); //ca fonctionne pas mais oklm
                   Navigator.pop(context);
                 },
               )

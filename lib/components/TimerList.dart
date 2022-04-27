@@ -184,7 +184,7 @@ class TimersList extends StatelessWidget {
                                 children: [
                                   GFButton(
                                       onPressed: () {
-                                        FirebaseFirestore.instance.collection('Timer').doc(timer.name).delete(); //ca fonctionne pas mais oklm
+
                                       },
                                       text: 'delete timer',
                                       icon: Icon(Icons.add),
