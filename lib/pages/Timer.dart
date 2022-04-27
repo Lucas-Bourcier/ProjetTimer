@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:getwidget/components/button/gf_button.dart';
@@ -7,23 +8,23 @@ import 'package:getwidget/components/button/gf_button_bar.dart';
 import 'package:getwidget/components/card/gf_card.dart';
 import 'package:getwidget/components/list_tile/gf_list_tile.dart';
 import 'package:project_timer/components/TimerList.dart';
+import 'package:project_timer/models/Timer.dart';
 
-class Timer extends StatefulWidget {
-  const Timer({Key? key, this.title}) : super(key: key);
+class TimerPage extends StatefulWidget {
+  const TimerPage({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  State<Timer> createState() => _Timer();
+  State<TimerPage> createState() => _Timer();
 }
 
 Future<void> _confirmationClearList(context) async {
   final _formKey = GlobalKey<FormState>();
   String name = "";
   String description = "";
-  String duree = "";
+  int duree = 10;
   int ordre = 0;
-  DateTime activationDate = DateTime.now();
   bool visible = false;
   bool statut = false;
   String selectedValue = "One";
@@ -45,7 +46,7 @@ Future<void> _confirmationClearList(context) async {
                       if (value == null || value.isEmpty) {
                         return 'Please enter some text';
                       }
-                      return value = name;
+                      return name = value;
                     },
                   ),
                   TextFormField(
@@ -56,7 +57,7 @@ Future<void> _confirmationClearList(context) async {
                       if (value == null || value.isEmpty) {
                         return 'Please enter some text';
                       }
-                      return value = description;
+                      return description = value;
                     },
                   ),
                   TextFormField(
@@ -70,7 +71,7 @@ Future<void> _confirmationClearList(context) async {
                       if (value == null || value.isEmpty) {
                         return 'Please enter some text';
                       }
-                      return value = duree;
+                      //return value = duree; a voir
                     },
                   ),
                   Checkbox(
@@ -124,8 +125,8 @@ Future<void> _confirmationClearList(context) async {
                 textColor: Colors.white,
                 child: const Text('CONFIRM'),
                 onPressed: () {
-                  // timer.addTimer(name, duree.hashCode, description, statut,
-                  //     visible, ordre, activationDate);
+                  Timer u = Timer(name: name,description: description,duree: duree,ordre: ordre,statut: statut,visible: visible);
+                  FirebaseFirestore.instance.collection('Timer').add(u.toJson());
                   Navigator.pop(context);
                 },
               )
@@ -133,7 +134,7 @@ Future<void> _confirmationClearList(context) async {
       });
 }
 
-class _Timer extends State<Timer> {
+class _Timer extends State<TimerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -182,7 +183,7 @@ class _Timer extends State<Timer> {
                       padding: const EdgeInsets.fromLTRB(0, 25, 0, 0),
                       children: [
                         GFButton(
-                            onPressed: () {},
+                            onPressed: () {_confirmationClearList(context);},
                             text: 'Ajouter timer',
                             icon: const Icon(
                               Icons.add,

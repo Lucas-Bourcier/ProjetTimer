@@ -64,7 +64,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => const Timer(title: 'Crono'),
+        '/': (context) => const TimerPage(title: 'Crono'),
         '/grid': (context) => const GridTemplate(title: 'Crono'),
         '/connection': (context) => Connection(title: 'Crono'),
         '/register': (context) => Register(title: 'Crono')

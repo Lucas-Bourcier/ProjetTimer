@@ -7,8 +7,6 @@ import 'package:getwidget/getwidget.dart';
 import 'package:project_timer/models/Timer.dart';
 
 class TimersList extends StatelessWidget {
-  final CountDownController _controller = CountDownController();
-
   @override
   Widget build(BuildContext context) {
     return FirestoreBuilder<TimerQuerySnapshot>(
@@ -30,6 +28,8 @@ class TimersList extends StatelessWidget {
               // Access the User instance
               Timer timer = querySnapshot.docs[index].data;
               final int _duration = timer.duree;
+              final CountDownController _controller = CountDownController();
+
               return Container(
                 height: 500,
                 child: GFCard(
