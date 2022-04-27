@@ -50,7 +50,7 @@ Future<void> _confirmationClearList(context) async {
                   ),
                   TextFormField(
                     decoration:
-                    InputDecoration(labelText: 'Description du timer'),
+                        InputDecoration(labelText: 'Description du timer'),
                     // The validator receives the text that the user has entered.
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -81,12 +81,12 @@ Future<void> _confirmationClearList(context) async {
                   DropdownButtonFormField(
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                             color: Colors.deepPurpleAccent, width: 2),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       border: OutlineInputBorder(
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                             color: Colors.deepPurpleAccent, width: 2),
                         borderRadius: BorderRadius.circular(20),
                       ),
@@ -137,44 +137,65 @@ class _Timer extends State<Timer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false, // set it to false
         appBar: AppBar(
           title: Text(widget.title!),
         ),
         body: SingleChildScrollView(
-          child: Container(
-            width: MediaQuery
-                .of(context)
-                .size
-                .width / 2,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                    flex: 0,
-                    child: OutlinedButton(
-                      onPressed: () {
-                        _confirmationClearList(context);
-                      },
-                      child: const Text('Ajouter un Timer'),
-                    )),
-                GFCard(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+              child: Row(
+                children: [
+                  GFButton(
+                      onPressed: () {},
+                      text: 'Ajouter groupe',
+                      icon: const Icon(
+                        Icons.add,
+                        color: Colors.white,
+                      ),
+                      color: const Color.fromRGBO(72, 70, 70, 1.0)),
+                  const SizedBox(width: 10),
+                  GFButton(
+                      onPressed: () {},
+                      text: 'Ajouter trame',
+                      icon: const Icon(
+                        Icons.add,
+                        color: Colors.white,
+                      ),
+                      color: const Color.fromRGBO(72, 70, 70, 1.0)),
+                ],
+              ),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width / 2.5,
+              child: GFCard(
                   title: GFListTile(
-                    title: Text(
+                    title: const Text(
                       "GROUPE 1",
                       style: TextStyle(color: Colors.white),
                     ),
                     subTitle: GFButtonBar(
+                      padding: const EdgeInsets.fromLTRB(0, 25, 0, 0),
                       children: [
                         GFButton(
                             onPressed: () {},
                             text: 'Ajouter timer',
-                            icon: Icon(Icons.add),
+                            icon: const Icon(
+                              Icons.add,
+                              color: Colors.white,
+                            ),
                             color: const Color.fromRGBO(72, 70, 70, 1.0)),
                         GFButton(
                             onPressed: () {},
                             text: 'Ajouter trame',
-                            icon: Icon(Icons.add),
+                            icon: const Icon(
+                              Icons.add,
+                              color: Colors.white,
+                            ),
                             color: const Color.fromRGBO(72, 70, 70, 1.0)),
                       ],
                     ),
@@ -183,13 +204,10 @@ class _Timer extends State<Timer> {
                   content: Column(
                     children: [
                       TimersList(),
-
                     ],
-                  ),
-                )
-              ],
+                  )),
             ),
-          ),
-        ));
+          ],
+        )));
   }
 }
