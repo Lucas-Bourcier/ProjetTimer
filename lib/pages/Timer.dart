@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:getwidget/components/button/gf_button.dart';
@@ -7,23 +8,23 @@ import 'package:getwidget/components/button/gf_button_bar.dart';
 import 'package:getwidget/components/card/gf_card.dart';
 import 'package:getwidget/components/list_tile/gf_list_tile.dart';
 import 'package:project_timer/components/TimerList.dart';
+import 'package:project_timer/models/Timer.dart';
 
-class Timer extends StatefulWidget {
-  const Timer({Key? key, this.title}) : super(key: key);
+class TimerPage extends StatefulWidget {
+  const TimerPage({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  State<Timer> createState() => _Timer();
+  State<TimerPage> createState() => _Timer();
 }
 
 Future<void> _confirmationClearList(context) async {
   final _formKey = GlobalKey<FormState>();
   String name = "";
   String description = "";
-  String duree = "";
+  int duree = 10;
   int ordre = 0;
-  DateTime activationDate = DateTime.now();
   bool visible = false;
   bool statut = false;
   String selectedValue = "One";
@@ -45,18 +46,18 @@ Future<void> _confirmationClearList(context) async {
                       if (value == null || value.isEmpty) {
                         return 'Please enter some text';
                       }
-                      return value = name;
+                      return name = value;
                     },
                   ),
                   TextFormField(
                     decoration:
-                    InputDecoration(labelText: 'Description du timer'),
+                        InputDecoration(labelText: 'Description du timer'),
                     // The validator receives the text that the user has entered.
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter some text';
                       }
-                      return value = description;
+                      return description = value;
                     },
                   ),
                   TextFormField(
@@ -70,7 +71,7 @@ Future<void> _confirmationClearList(context) async {
                       if (value == null || value.isEmpty) {
                         return 'Please enter some text';
                       }
-                      return value = duree;
+                      //return value = duree; a voir
                     },
                   ),
                   Checkbox(
@@ -81,12 +82,12 @@ Future<void> _confirmationClearList(context) async {
                   DropdownButtonFormField(
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                             color: Colors.deepPurpleAccent, width: 2),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       border: OutlineInputBorder(
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                             color: Colors.deepPurpleAccent, width: 2),
                         borderRadius: BorderRadius.circular(20),
                       ),
@@ -124,8 +125,8 @@ Future<void> _confirmationClearList(context) async {
                 textColor: Colors.white,
                 child: const Text('CONFIRM'),
                 onPressed: () {
-                  // timer.addTimer(name, duree.hashCode, description, statut,
-                  //     visible, ordre, activationDate);
+                  Timer u = Timer(name: name,description: description,duree: duree,ordre: ordre,statut: statut,visible: visible);
+                  FirebaseFirestore.instance.collection('Timer').add(u.toJson());
                   Navigator.pop(context);
                 },
               )
@@ -133,48 +134,61 @@ Future<void> _confirmationClearList(context) async {
       });
 }
 
-class _Timer extends State<Timer> {
+class _Timer extends State<TimerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false, // set it to false
         appBar: AppBar(
           title: Text(widget.title!),
         ),
         body: SingleChildScrollView(
-          child: Container(
-            width: MediaQuery
-                .of(context)
-                .size
-                .width / 2,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                    flex: 0,
-                    child: OutlinedButton(
-                      onPressed: () {
-                        _confirmationClearList(context);
-                      },
-                      child: const Text('Ajouter un Timer'),
-                    )),
-                GFCard(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+              child: Row(
+                children: [
+                  GFButton(
+                      onPressed: () {},
+                      text: 'Ajouter groupe',
+                      icon: const Icon(
+                        Icons.add,
+                        color: Colors.white,
+                      ),
+                      color: const Color.fromRGBO(72, 70, 70, 1.0)),
+                  const SizedBox(width: 10),
+                  GFButton(
+                      onPressed: () {},
+                      text: 'Ajouter trame',
+                      icon: const Icon(
+                        Icons.add,
+                        color: Colors.white,
+                      ),
+                      color: const Color.fromRGBO(72, 70, 70, 1.0)),
+                ],
+              ),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width / 2.5,
+              child: GFCard(
                   title: GFListTile(
-                    title: Text(
+                    title: const Text(
                       "GROUPE 1",
                       style: TextStyle(color: Colors.white),
                     ),
                     subTitle: GFButtonBar(
+                      padding: const EdgeInsets.fromLTRB(0, 25, 0, 0),
                       children: [
                         GFButton(
-                            onPressed: () {},
+                            onPressed: () {_confirmationClearList(context);},
                             text: 'Ajouter timer',
-                            icon: Icon(Icons.add),
-                            color: const Color.fromRGBO(72, 70, 70, 1.0)),
-                        GFButton(
-                            onPressed: () {},
-                            text: 'Ajouter trame',
-                            icon: Icon(Icons.add),
+                            icon: const Icon(
+                              Icons.add,
+                              color: Colors.white,
+                            ),
                             color: const Color.fromRGBO(72, 70, 70, 1.0)),
                       ],
                     ),
@@ -183,13 +197,10 @@ class _Timer extends State<Timer> {
                   content: Column(
                     children: [
                       TimersList(),
-
                     ],
-                  ),
-                )
-              ],
+                  )),
             ),
-          ),
-        ));
+          ],
+        )));
   }
 }
