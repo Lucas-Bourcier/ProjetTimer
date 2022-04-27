@@ -189,14 +189,6 @@ class _Timer extends State<Timer> {
                               color: Colors.white,
                             ),
                             color: const Color.fromRGBO(72, 70, 70, 1.0)),
-                        GFButton(
-                            onPressed: () {},
-                            text: 'Ajouter trame',
-                            icon: const Icon(
-                              Icons.add,
-                              color: Colors.white,
-                            ),
-                            color: const Color.fromRGBO(72, 70, 70, 1.0)),
                       ],
                     ),
                   ),
