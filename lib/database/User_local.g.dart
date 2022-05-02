@@ -17,8 +17,8 @@ class UserAdapter extends TypeAdapter<User> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return User(
-      name: fields[0] as String,
-      prenom: fields[1] as String,
+      mail: fields[0] as String,
+      pass: fields[1] as String,
     );
   }
 
@@ -27,9 +27,9 @@ class UserAdapter extends TypeAdapter<User> {
     writer
       ..writeByte(2)
       ..writeByte(0)
-      ..write(obj.name)
+      ..write(obj.mail)
       ..writeByte(1)
-      ..write(obj.prenom);
+      ..write(obj.pass);
   }
 
   @override

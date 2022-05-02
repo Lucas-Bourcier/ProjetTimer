@@ -1,6 +1,14 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../components/FormConnection.dart';
+import 'package:project_timer/models/User.dart' as MyUser;
+
+import '../models/User.dart';
+
+
 
 class Connection extends StatefulWidget {
   const Connection({Key? key, this.title}) : super(key: key);
@@ -8,13 +16,18 @@ class Connection extends StatefulWidget {
   final String? title;
 
   @override
-  State<Connection> createState() => _Connection();
+  State<Connection> createState(){
+    return MyConnection();
+  }
 }
 
-class _Connection extends State<Connection> {
+class MyConnection extends State<Connection> {
+  final _Connection = GlobalKey<FormState>();
+  final FormConnection form=FormConnection();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _Connection,
       appBar: AppBar(title: Text('Connection')),
       body: Column(
         children: [
@@ -32,38 +45,19 @@ class _Connection extends State<Connection> {
                 ],
               )),
           Container(
-            child: FormConnection(),
+            child: form,
           ),
-        ],
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 0.0),
+            child: ElevatedButton(
+              onPressed: () async {
+                MyUser.User u = MyUser.User(mail: form.mail, pass: form.pass,);
+                FirebaseFirestore.instance.collection('User').where({'mail':u.mail,'pass':u.pass});
+              },
+              child: const Text('Valider'),
+            ),
+          )],
       ),
     );
-  }
-
-  static Future<User?> signInUsingEmailPassword({
-    required String email,
-    required String password,
-    required BuildContext context,
-  }) async {
-    FirebaseAuth auth = FirebaseAuth.instance;
-    User? user;
-
-    try {
-      UserCredential userCredential = await auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      user = userCredential.user;
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided.');
-      }
-    }
-
-    return user;
-  }
-  disconnect() {
-    FirebaseAuth.instance.signOut();
   }
 }
