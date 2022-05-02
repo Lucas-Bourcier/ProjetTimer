@@ -1,12 +1,7 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../components/FormConnection.dart';
 import 'package:project_timer/models/User.dart' as MyUser;
-
-import '../models/User.dart';
 
 
 
@@ -53,6 +48,7 @@ class MyConnection extends State<Connection> {
               onPressed: () async {
                 MyUser.User u = MyUser.User(mail: form.mail, pass: form.pass,);
                 FirebaseFirestore.instance.collection('User').where({'mail':u.mail,'pass':u.pass});
+                  Navigator.pop(context);
               },
               child: const Text('Valider'),
             ),

@@ -20,7 +20,7 @@ class UsersList extends StatelessWidget {
               // Access the User instance
               User user = querySnapshot.docs[index].data;
 
-              return Text('User name: ${user.mail}, age ${user.age}');
+              return Text('User name: ${user.mail}, age ${user.pass}');
             },
           );
         }
