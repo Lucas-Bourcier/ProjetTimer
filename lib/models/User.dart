@@ -7,20 +7,21 @@ part 'User.g.dart';
 @JsonSerializable()
 class User {
   User({
-    required this.name,
-    required this.age,
+    required this.mail,
+    required this.pass,
   });
+
 
   factory User.fromJson(Map<String, Object?> json) => _$UserFromJson(json);
 
-  final String name;
-  final int age;
+  final String mail;
+  final String pass;
 
   Map<String, Object?> toJson() => _$UserToJson(this);
 
   @override
   String toString(){
-    return "name : $name, age: $age";
+    return "mail : $mail, age: $pass";
   }
 }
 

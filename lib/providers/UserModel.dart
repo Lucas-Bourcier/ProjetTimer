@@ -8,22 +8,22 @@ class UserModel extends ChangeNotifier{
     return _users;
   }
 
-  addUser(String name, String prenom) {
-    _users.add(User(name: name, prenom: prenom));
+  addUser(String mail, String pass) {
+    _users.add(User(mail: mail, pass: pass));
     notifyListeners();
   }
 
-  updateUser(int index, String newName,String newPrenom) {
-    _users[index].name = newName;
-    _users[index].prenom = newPrenom;
+  updateUser(int index, String newMail,String newPass) {
+    _users[index].mail = newMail;
+    _users[index].pass = newPass;
     notifyListeners();
   }
 
-  insertOrUpdateUser(int index, String newName, String newPrenom) {
+  insertOrUpdateUser(int index, String newMail, String newPass) {
     if (index == -1) {
-      addUser(newName, newPrenom);
+      addUser(newMail, newPass);
     } else {
-      updateUser(index, newName, newPrenom);
+      updateUser(index, newMail, newPass);
     }
   }
 
