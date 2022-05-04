@@ -2,15 +2,10 @@
 
 Timer Application
 
-## Getting Started
+L'application conçue si contre : [Insérer lien du timer]
 
-This project is a starting point for a Flutter application.
+Est utilisée à des fins d'alerte via des utilisateurs ou des groupes créé au choix de l'utilisateur.
 
-A few resources to get you started if this is your first Flutter project:
+En cas d'incidents ou de conseil à apporté à notre projet, n'hésitez pas à nous contacter via nos mails.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+mail : lbourcier02@gmail.com
