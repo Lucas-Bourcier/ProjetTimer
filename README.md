@@ -2,7 +2,7 @@
 
 Timer Application
 
-L'application conçue si contre : [Insérer lien du timer]
+L'application conçue ci contre : [Insérer lien du timer]
 
 Est utilisée à des fins d'alerte via des utilisateurs ou des groupes créé au choix de l'utilisateur.
 
