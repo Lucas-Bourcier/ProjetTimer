@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_firestore_odm/cloud_firestore_odm.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
@@ -186,7 +187,7 @@ class TimersList extends StatelessWidget {
                                   ),
                                   color: const Color.fromRGBO(47, 47, 47, 1.0)),
                               GFButton(
-                                  onPressed: () {},
+                                  onPressed: () {FirebaseFirestore.instance.collection('Timer').doc(querySnapshot.docs[index].id).delete();},
                                   text: 'Supprimer timer',
                                   icon: const Icon(
                                     Icons.add,
