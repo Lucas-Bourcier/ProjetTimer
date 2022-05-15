@@ -50,7 +50,7 @@ Future<void> _confirmationClearList(context) async {
                   ),
                   TextFormField(
                     decoration:
-                    InputDecoration(labelText: 'Description du timer'),
+                        InputDecoration(labelText: 'Description du timer'),
                     // The validator receives the text that the user has entered.
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -73,40 +73,6 @@ Future<void> _confirmationClearList(context) async {
                       return value = duree;
                     },
                   ),
-                  Checkbox(
-                      value: visible,
-                      onChanged: (bool? value) {
-                        visible = value!;
-                      }),
-                  DropdownButtonFormField(
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Colors.deepPurpleAccent, width: 2),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Colors.deepPurpleAccent, width: 2),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      filled: true,
-                      fillColor: Colors.deepPurpleAccent,
-                    ),
-                    dropdownColor: Colors.deepPurpleAccent,
-                    value: selectedValue,
-                    onChanged: (String? newValue) {
-                      selectedValue = newValue!;
-                      print(selectedValue);
-                    },
-                    items: <String>['One', 'Two', 'Free', 'Four']
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                  )
                 ],
               ),
             ),
@@ -142,10 +108,7 @@ class _Timer extends State<Timer> {
         ),
         body: SingleChildScrollView(
           child: Container(
-            width: MediaQuery
-                .of(context)
-                .size
-                .width / 2,
+            width: MediaQuery.of(context).size.width / 2,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -183,7 +146,6 @@ class _Timer extends State<Timer> {
                   content: Column(
                     children: [
                       TimersList(),
-
                     ],
                   ),
                 )
@@ -193,3 +155,40 @@ class _Timer extends State<Timer> {
         ));
   }
 }
+
+/*Checkbox(
+                      value: visible,
+                      onChanged: (bool? value) {
+                        visible = value!;
+                      }),
+
+DropdownButtonFormField(
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Colors.deepPurpleAccent, width: 2),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Colors.deepPurpleAccent, width: 2),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      filled: true,
+                      fillColor: Colors.deepPurpleAccent,
+                    ),
+                    dropdownColor: Colors.deepPurpleAccent,
+                    value: selectedValue,
+                    onChanged: (String? newValue) {
+                      selectedValue = newValue!;
+                      print(selectedValue);
+                    },
+                    items: <String>['One', 'Two', 'Free', 'Four']
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  )
+*/
