@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
 import '../components/FormConnection.dart';
+import 'package:project_timer/models/User.dart' as MyUser;
+
+
 
 class Connection extends StatefulWidget {
   const Connection({Key? key, this.title}) : super(key: key);
@@ -8,13 +11,18 @@ class Connection extends StatefulWidget {
   final String? title;
 
   @override
-  State<Connection> createState() => _Connection();
+  State<Connection> createState(){
+    return MyConnection();
+  }
 }
 
-class _Connection extends State<Connection> {
+class MyConnection extends State<Connection> {
+  final _Connection = GlobalKey<FormState>();
+  final FormConnection form=FormConnection();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _Connection,
       appBar: AppBar(title: Text('Connection')),
       body: Column(
         children: [
@@ -32,9 +40,19 @@ class _Connection extends State<Connection> {
                 ],
               )),
           Container(
-            child: FormConnection(),
+            child: form,
           ),
-        ],
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 0.0),
+            child: ElevatedButton(
+              onPressed: () async {
+                MyUser.User u = MyUser.User(mail: form.mail, pass: form.pass,);
+                FirebaseFirestore.instance.collection('User').where({'mail':u.mail,'pass':u.pass});
+                  Navigator.pop(context);
+              },
+              child: const Text('Valider'),
+            ),
+          )],
       ),
     );
   }

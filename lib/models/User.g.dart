@@ -114,8 +114,8 @@ abstract class UserDocumentReference
   Future<void> delete();
 
   Future<void> update({
-    String name,
-    int age,
+    String mail,
+    String pass,
   });
 
   Future<void> set(User value);
@@ -160,12 +160,12 @@ class _$UserDocumentReference
   }
 
   Future<void> update({
-    Object? name = _sentinel,
-    Object? age = _sentinel,
+    Object? mail = _sentinel,
+    Object? pass = _sentinel,
   }) async {
     final json = {
-      if (name != _sentinel) "name": name as String,
-      if (age != _sentinel) "age": age as int,
+      if (mail != _sentinel) "mail": mail as String,
+      if (pass != _sentinel) "pass": pass as String,
     };
 
     return reference.update(json);
@@ -214,7 +214,7 @@ abstract class UserQuery implements QueryReference<UserQuerySnapshot> {
   @override
   UserQuery limitToLast(int limit);
 
-  UserQuery whereName({
+  UserQuery whereMail({
     String? isEqualTo,
     String? isNotEqualTo,
     String? isLessThan,
@@ -225,19 +225,19 @@ abstract class UserQuery implements QueryReference<UserQuerySnapshot> {
     List<String>? whereIn,
     List<String>? whereNotIn,
   });
-  UserQuery whereAge({
-    int? isEqualTo,
-    int? isNotEqualTo,
-    int? isLessThan,
-    int? isLessThanOrEqualTo,
-    int? isGreaterThan,
-    int? isGreaterThanOrEqualTo,
+  UserQuery wherePass({
+    String? isEqualTo,
+    String? isNotEqualTo,
+    String? isLessThan,
+    String? isLessThanOrEqualTo,
+    String? isGreaterThan,
+    String? isGreaterThanOrEqualTo,
     bool? isNull,
-    List<int>? whereIn,
-    List<int>? whereNotIn,
+    List<String>? whereIn,
+    List<String>? whereNotIn,
   });
 
-  UserQuery orderByName({
+  UserQuery orderByMail({
     bool descending = false,
     String startAt,
     String startAfter,
@@ -249,12 +249,12 @@ abstract class UserQuery implements QueryReference<UserQuerySnapshot> {
     UserDocumentSnapshot? startAfterDocument,
   });
 
-  UserQuery orderByAge({
+  UserQuery orderByPass({
     bool descending = false,
-    int startAt,
-    int startAfter,
-    int endAt,
-    int endBefore,
+    String startAt,
+    String startAfter,
+    String endAt,
+    String endBefore,
     UserDocumentSnapshot? startAtDocument,
     UserDocumentSnapshot? endAtDocument,
     UserDocumentSnapshot? endBeforeDocument,
@@ -323,7 +323,7 @@ class _$UserQuery extends QueryReference<UserQuerySnapshot>
     );
   }
 
-  UserQuery whereName({
+  UserQuery whereMail({
     String? isEqualTo,
     String? isNotEqualTo,
     String? isLessThan,
@@ -336,7 +336,7 @@ class _$UserQuery extends QueryReference<UserQuerySnapshot>
   }) {
     return _$UserQuery(
       reference.where(
-        'name',
+        'mail',
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -351,20 +351,20 @@ class _$UserQuery extends QueryReference<UserQuerySnapshot>
     );
   }
 
-  UserQuery whereAge({
-    int? isEqualTo,
-    int? isNotEqualTo,
-    int? isLessThan,
-    int? isLessThanOrEqualTo,
-    int? isGreaterThan,
-    int? isGreaterThanOrEqualTo,
+  UserQuery wherePass({
+    String? isEqualTo,
+    String? isNotEqualTo,
+    String? isLessThan,
+    String? isLessThanOrEqualTo,
+    String? isGreaterThan,
+    String? isGreaterThanOrEqualTo,
     bool? isNull,
-    List<int>? whereIn,
-    List<int>? whereNotIn,
+    List<String>? whereIn,
+    List<String>? whereNotIn,
   }) {
     return _$UserQuery(
       reference.where(
-        'age',
+        'pass',
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -379,7 +379,7 @@ class _$UserQuery extends QueryReference<UserQuerySnapshot>
     );
   }
 
-  UserQuery orderByName({
+  UserQuery orderByMail({
     bool descending = false,
     Object? startAt = _sentinel,
     Object? startAfter = _sentinel,
@@ -390,7 +390,7 @@ class _$UserQuery extends QueryReference<UserQuerySnapshot>
     UserDocumentSnapshot? endBeforeDocument,
     UserDocumentSnapshot? startAfterDocument,
   }) {
-    var query = reference.orderBy('name', descending: descending);
+    var query = reference.orderBy('mail', descending: descending);
 
     if (startAtDocument != null) {
       query = query.startAtDocument(startAtDocument.snapshot);
@@ -421,7 +421,7 @@ class _$UserQuery extends QueryReference<UserQuerySnapshot>
     return _$UserQuery(query, _collection);
   }
 
-  UserQuery orderByAge({
+  UserQuery orderByPass({
     bool descending = false,
     Object? startAt = _sentinel,
     Object? startAfter = _sentinel,
@@ -432,7 +432,7 @@ class _$UserQuery extends QueryReference<UserQuerySnapshot>
     UserDocumentSnapshot? endBeforeDocument,
     UserDocumentSnapshot? startAfterDocument,
   }) {
-    var query = reference.orderBy('age', descending: descending);
+    var query = reference.orderBy('pass', descending: descending);
 
     if (startAtDocument != null) {
       query = query.startAtDocument(startAtDocument.snapshot);
@@ -512,11 +512,11 @@ class UserQueryDocumentSnapshot extends FirestoreQueryDocumentSnapshot
 // **************************************************************************
 
 User _$UserFromJson(Map<String, dynamic> json) => User(
-      name: json['name'] as String,
-      age: json['age'] as int,
+      mail: json['mail'] as String,
+      pass: json['pass'] as String,
     );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
-      'name': instance.name,
-      'age': instance.age,
+      'mail': instance.mail,
+      'pass': instance.pass,
     };

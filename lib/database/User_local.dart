@@ -5,12 +5,12 @@ part 'User_local.g.dart';
 @HiveType(typeId: 4)
 class User{
   @HiveField(0)
-  String name;
+  String mail;
   @HiveField(1)
-  String prenom;
+  String pass;
 
   User({
-    required this.name,
-    required this.prenom,
+    required this.mail,
+    required this.pass,
   });
 }
