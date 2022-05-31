@@ -1,0 +1,28 @@
+^E:\FLUTTER\PROJETTIMER\BUILD\WINDOWS\CMAKEFILES\1AD909F69D7ABDF8027329C928296D78\FLUTTER_WINDOWS.DLL.RULE
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E env FLUTTER_ROOT=C:\flutter PROJECT_DIR=E:\flutter\ProjetTimer FLUTTER_ROOT=C:\flutter FLUTTER_EPHEMERAL_DIR=E:\flutter\ProjetTimer\windows\flutter\ephemeral PROJECT_DIR=E:\flutter\ProjetTimer FLUTTER_TARGET=E:\flutter\ProjetTimer\lib\main.dart DART_DEFINES=RkxVVFRFUl9XRUJfQVVUT19ERVRFQ1Q9dHJ1ZQ== DART_OBFUSCATION=false TRACK_WIDGET_CREATION=true TREE_SHAKE_ICONS=false PACKAGE_CONFIG=E:\flutter\ProjetTimer\.dart_tool\package_config.json C:/flutter/packages/flutter_tools/bin/tool_backend.bat windows-x64 Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^E:\FLUTTER\PROJETTIMER\BUILD\WINDOWS\CMAKEFILES\0D67245EFEEBB477A5F9A8BC89337327\FLUTTER_ASSEMBLE.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^E:\FLUTTER\PROJETTIMER\WINDOWS\FLUTTER\CMAKELISTS.TXT
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SE:/flutter/ProjetTimer/windows -BE:/flutter/ProjetTimer/build/windows --check-stamp-file E:/flutter/ProjetTimer/build/windows/flutter/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
