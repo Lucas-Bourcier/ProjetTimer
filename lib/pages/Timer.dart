@@ -4,11 +4,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:getwidget/components/button/gf_button.dart';
-import 'package:getwidget/components/button/gf_button_bar.dart';
-import 'package:getwidget/components/card/gf_card.dart';
-import 'package:getwidget/components/list_tile/gf_list_tile.dart';
-import 'package:project_timer/components/TimerList.dart';
+import 'package:project_timer/models/Groupe.dart';
 import 'package:project_timer/models/Timer.dart';
+
+import '../components/GroupList.dart';
 
 class TimerPage extends StatefulWidget {
   const TimerPage({Key? key, this.title}) : super(key: key);
@@ -30,7 +29,6 @@ Future<void> _confirmationClearList(context) async {
   bool statut = false;
   String selectedValue = "One";
 
-
   return showDialog(
       context: context,
       builder: (context) {
@@ -47,7 +45,8 @@ Future<void> _confirmationClearList(context) async {
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter some text';
-                      }return null;
+                      }
+                      return null;
                     },
                     controller: nameController,
                   ),
@@ -127,8 +126,16 @@ Future<void> _confirmationClearList(context) async {
                 textColor: Colors.white,
                 child: const Text('CONFIRM'),
                 onPressed: () {
-                  Timer u = Timer(name: nameController.text,description: descriptionController.text,duree: int.parse(timeController.text),ordre: ordre,statut: statut,visible: visible);
-                  FirebaseFirestore.instance.collection('Timer').add(u.toJson());
+                  Timer u = Timer(
+                      name: nameController.text,
+                      description: descriptionController.text,
+                      duree: int.parse(timeController.text),
+                      ordre: ordre,
+                      statut: statut,
+                      visible: visible);
+                  FirebaseFirestore.instance
+                      .collection('Timer')
+                      .add(u.toJson());
                   //FirebaseFirestore.instance.collection('Timer').doc(Timer.uid).delete(); //ca fonctionne pas mais oklm
                   Navigator.pop(context);
                 },
@@ -155,17 +162,10 @@ class _Timer extends State<TimerPage> {
               child: Row(
                 children: [
                   GFButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        _confirmationCreateGroup(context);
+                      },
                       text: 'Ajouter groupe',
-                      icon: const Icon(
-                        Icons.add,
-                        color: Colors.white,
-                      ),
-                      color: const Color.fromRGBO(72, 70, 70, 1.0)),
-                  const SizedBox(width: 10),
-                  GFButton(
-                      onPressed: () {},
-                      text: 'Ajouter trame',
                       icon: const Icon(
                         Icons.add,
                         color: Colors.white,
@@ -174,36 +174,73 @@ class _Timer extends State<TimerPage> {
                 ],
               ),
             ),
-            Container(
-              width: MediaQuery.of(context).size.width / 2.5,
-              child: GFCard(
-                  title: GFListTile(
-                    title: const Text(
-                      "GROUPE 1",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    subTitle: GFButtonBar(
-                      padding: const EdgeInsets.fromLTRB(0, 25, 0, 0),
-                      children: [
-                        GFButton(
-                            onPressed: () {_confirmationClearList(context);},
-                            text: 'Ajouter timer',
-                            icon: const Icon(
-                              Icons.add,
-                              color: Colors.white,
-                            ),
-                            color: const Color.fromRGBO(72, 70, 70, 1.0)),
-                      ],
-                    ),
-                  ),
-                  color: const Color.fromRGBO(47, 47, 47, 1.0),
-                  content: Column(
-                    children: [
-                      TimersList(),
-                    ],
-                  )),
-            ),
+            Row(
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width / 2.5,
+                  child: GroupList(),
+                ),
+              ],
+            )
           ],
         )));
   }
+}
+
+Future<void> _confirmationCreateGroup(context) async {
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController timeController = TextEditingController();
+  String libelle = "test";
+
+  return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+            content: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextFormField(
+                    decoration:
+                        const InputDecoration(labelText: 'Nom du groupe'),
+                    // The validator receives the text that the user has entered.
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter some text';
+                      }
+                      return null;
+                    },
+                    controller: nameController,
+                  ),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                color: Colors.red,
+                textColor: Colors.white,
+                child: const Text('CANCEL'),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              FlatButton(
+                color: Colors.green,
+                textColor: Colors.white,
+                child: const Text('CONFIRM'),
+                onPressed: () {
+                  Groupe u = Groupe(libelle: nameController.text);
+                  FirebaseFirestore.instance
+                      .collection('Groupe')
+                      .add(u.toJson());
+                  //FirebaseFirestore.instance.collection('Timer').doc(Timer.uid).delete(); //ca fonctionne pas mais oklm
+                  Navigator.pop(context);
+                },
+              )
+            ]);
+      });
 }

@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:ui';
 
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -32,7 +33,6 @@ class TimersList extends StatelessWidget {
               final CountDownController _controller = CountDownController();
 
               return Container(
-                height: 500,
                 child: GFCard(
                   color: const Color.fromRGBO(72, 70, 70, 1.0),
                   boxFit: BoxFit.cover,
@@ -43,11 +43,14 @@ class TimersList extends StatelessWidget {
                       backgroundImage: AssetImage('images/test.webp'),
                     ),
                     title: Text(
-                      '${timer.name}',
-                      style: const TextStyle(color: Colors.white),
+                      timer.name,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     subTitle: Text(
-                      '${timer.description}',
+                      timer.description,
                       style: const TextStyle(color: Colors.white),
                     ),
                   ),
@@ -131,72 +134,81 @@ class TimersList extends StatelessWidget {
                               debugPrint('Countdown Ended');
                             },
                           ),
-                          Column(
-                            children: [
-                              Row(
-                                children: [
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  _button(
-                                      title: "Start",
-                                      onPressed: () => _controller.start(),
-                                      icon: Icons.play_arrow),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  _button(
-                                      title: "Pause",
-                                      onPressed: () => _controller.pause(),
-                                      icon: Icons.pause),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  _button(
-                                      title: "Resume",
-                                      onPressed: () => _controller.resume(),
-                                      icon: Icons.play_circle),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  _button(
-                                      title: "Restart",
-                                      onPressed: () => _controller.restart(
-                                          duration: _duration),
-                                      icon: Icons.refresh),
-                                ],
-                              ),
-                            ],
-                          ),
                         ],
                       ),
-                      Row(
-                        children: [
-                          GFButtonBar(
-                            children: [
-                              GFButton(
-                                  onPressed: () {},
-                                  text: 'Modifier timer',
-                                  icon: const Icon(
-                                    Icons.add,
-                                    color: Colors.white,
-                                  ),
-                                  color: const Color.fromRGBO(47, 47, 47, 1.0)),
-                              GFButton(
-                                  onPressed: () {FirebaseFirestore.instance.collection('Timer').doc(querySnapshot.docs[index].id).delete();},
-                                  text: 'Supprimer timer',
-                                  icon: const Icon(
-                                    Icons.add,
-                                    color: Colors.white,
-                                  ),
-                                  color: const Color.fromRGBO(47, 47, 47, 1.0)),
-                            ],
-                          )
-                        ],
+                      Container(
+                        margin: const EdgeInsets.only(top: 30.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            _button(
+                                title: "Start",
+                                onPressed: () => _controller.start(),
+                                icon: Icons.play_arrow),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            _button(
+                                title: "Pause",
+                                onPressed: () => _controller.pause(),
+                                icon: Icons.pause),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            _button(
+                                title: "Resume",
+                                onPressed: () => _controller.resume(),
+                                icon: Icons.play_circle),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            _button(
+                                title: "Restart",
+                                onPressed: () =>
+                                    _controller.restart(duration: _duration),
+                                icon: Icons.refresh),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(top: 20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            GFButtonBar(
+                              children: [
+                                GFButton(
+                                    onPressed: () {},
+                                    text: 'Modifier timer',
+                                    icon: const Icon(
+                                      Icons.add,
+                                      color: Colors.white,
+                                    ),
+                                    color:
+                                        const Color.fromRGBO(47, 47, 47, 1.0)),
+                                GFButton(
+                                    onPressed: () {
+                                      FirebaseFirestore.instance
+                                          .collection('Timer')
+                                          .doc(querySnapshot.docs[index].id)
+                                          .delete();
+                                    },
+                                    text: 'Supprimer timer',
+                                    icon: const Icon(
+                                      Icons.add,
+                                      color: Colors.white,
+                                    ),
+                                    color:
+                                        const Color.fromRGBO(47, 47, 47, 1.0)),
+                              ],
+                            )
+                          ],
+                        ),
                       )
                     ],
                   ),

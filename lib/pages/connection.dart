@@ -1,10 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../components/FormConnection.dart';
 import 'package:project_timer/models/User.dart' as MyUser;
 
-
+import '../components/FormConnection.dart' '';
 
 class Connection extends StatefulWidget {
   const Connection({Key? key, this.title}) : super(key: key);
@@ -12,14 +10,15 @@ class Connection extends StatefulWidget {
   final String? title;
 
   @override
-  State<Connection> createState(){
+  State<Connection> createState() {
     return MyConnection();
   }
 }
 
 class MyConnection extends State<Connection> {
   final _connection = GlobalKey<FormState>();
-  final FormConnection form=FormConnection();
+  final FormConnection form = FormConnection();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,16 +47,22 @@ class MyConnection extends State<Connection> {
             child: ElevatedButton(
               onPressed: () async {
                 MyUser.User u = MyUser.User(mail: form.mail, pass: form.pass);
-                FirebaseFirestore.instance.collection('User').where({'mail':u.mail,'pass':u.pass});
+                FirebaseFirestore.instance
+                    .collection('User')
+                    .where({'mail': u.mail, 'pass': u.pass});
               },
               child: const Text('Valider'),
             ),
-          )],
+          )
+        ],
       ),
     );
   }
+
+/*
   //Sign in with email and password
-  Future<User> signInWithEmailAndPassword(String email, String password) async {
+  Future<Object> signInWithEmailAndPassword(
+      String email, String password) async {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     try {
       UserCredential result = await _auth.signInWithEmailAndPassword(
@@ -66,7 +71,8 @@ class MyConnection extends State<Connection> {
       return user!;
     } catch (e) {
       print(e.toString());
-      return ;
+      return User;
     }
   }
+  */
 }
