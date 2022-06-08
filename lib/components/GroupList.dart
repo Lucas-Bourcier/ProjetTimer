@@ -159,40 +159,7 @@ Future<void> _confirmationClearList(context) async {
                       }
                     },
                   ),
-                  Checkbox(
-                      value: visible,
-                      onChanged: (bool? value) {
-                        visible = value!;
-                      }),
-                  DropdownButtonFormField(
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                            color: Colors.deepPurpleAccent, width: 2),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                            color: Colors.deepPurpleAccent, width: 2),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      filled: true,
-                      fillColor: Colors.deepPurpleAccent,
-                    ),
-                    dropdownColor: Colors.deepPurpleAccent,
-                    value: selectedValue,
-                    onChanged: (String? newValue) {
-                      selectedValue = newValue!;
-                      print(selectedValue);
-                    },
-                    items: <String>['One', 'Two', 'Free', 'Four']
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                  )
+
                 ],
               ),
             ),
